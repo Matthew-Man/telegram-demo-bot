@@ -30,7 +30,7 @@ bot.command('timer', (ctx) => {
         ctx.reply(`Timer accepted: ${seconds}; I'll give you a shout when the timer runs out :)`);
         isTimerActive = true;
         setTimer(parseInt(seconds))
-    } else if (timerId) {
+    } else if (timerId && isTimerActive) {
         clearTimeout(timerId);
         isTimerActive = false;
         timerId = undefined;
@@ -38,7 +38,7 @@ bot.command('timer', (ctx) => {
     } else if (!isTimeValid) {
         ctx.reply(`Please select a valid time for me to count - I can't count pass ${maxTimeAllowed} or less than 1 - see ..58, 59, 60, 4, 105, 23... -_-`);
     } else if (isTimerActive) {
-        ctx.reply("Sorry, you've got a timer active already - please wait until it's over");
+        ctx.reply("Sorry, you've got a timer active already - please wait until it's over or cancel it early using /timer stop");
     } else {
         ctx.reply("Oops, please specify how many seconds you want me time for... e.g. /timer 10 or /timer 60");
     }
